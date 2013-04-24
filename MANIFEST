@@ -1,0 +1,10 @@
+LICENSE
+MANIFEST
+META.yml
+Makefile.PL
+README
+README.pod
+cpanfile
+dist.ini
+lib/PrankCall.pm
+t/prank.t

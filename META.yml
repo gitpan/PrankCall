@@ -1,0 +1,24 @@
+---
+abstract: 'call remote services and hang up without waiting for a response'
+author:
+  - 'Logan Bell <logie@cpan.org>'
+build_requires: {}
+configure_requires:
+  ExtUtils::MakeMaker: 6.30
+dynamic_config: 0
+generated_by: 'Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921'
+license: perl
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: PrankCall
+requires:
+  HTTP::Request: 0
+  Test::Fake::HTTPD: 0
+  Test::More: 0
+  Try::Tiny: 0
+  URI: 0
+resources:
+  bugtracker: https://github.com/logie17/PrankCall/issues
+  repository: https://github.com/logie17/PrankCall.git
+version: 0.001
