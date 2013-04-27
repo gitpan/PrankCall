@@ -1,0 +1,13 @@
+Revision history for PrankCall
+
+0.002 2013-04-26
+  
+  - Release "Is your refrigerator running?"
+  - Added redial
+  - Added ability to cache sockets
+  - New override options for Timeout and Blocking
+  - Pass back self in callback (Thanks Belden Lyman)
+
+0.001  2013-04-24
+
+  -Initial release

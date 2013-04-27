@@ -1,9 +1,10 @@
 
 
 This archive contains the distribution PrankCall,
-version 0.001:
+version 0.002:
 
-  call remote services and hang up without waiting for a response
+  call remote services and hang up without waiting for a response. A word of warning,
+this module should only be used for those who are comfortable with one way communication
 
 This software is copyright (c) 2013 by Shutterstock Inc..
 

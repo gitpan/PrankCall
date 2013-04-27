@@ -9,7 +9,7 @@ use ExtUtils::MakeMaker 6.30;
 
 
 my %WriteMakefileArgs = (
-  "ABSTRACT" => "call remote services and hang up without waiting for a response",
+  "ABSTRACT" => "call remote services and hang up without waiting for a response. A word of warning,\nthis module should only be used for those who are comfortable with one way communication",
   "AUTHOR" => "Logan Bell <logie\@cpan.org>",
   "BUILD_REQUIRES" => {},
   "CONFIGURE_REQUIRES" => {
@@ -26,8 +26,10 @@ my %WriteMakefileArgs = (
     "Try::Tiny" => 0,
     "URI" => 0
   },
-  "TEST_REQUIRES" => {},
-  "VERSION" => "0.001",
+  "TEST_REQUIRES" => {
+    "Test::Most" => 0
+  },
+  "VERSION" => "0.002",
   "test" => {
     "TESTS" => "t/*.t"
   }
