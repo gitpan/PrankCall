@@ -21,15 +21,16 @@ my %WriteMakefileArgs = (
   "NAME" => "PrankCall",
   "PREREQ_PM" => {
     "HTTP::Request" => 0,
-    "Test::Fake::HTTPD" => 0,
-    "Test::More" => 0,
     "Try::Tiny" => 0,
     "URI" => 0
   },
   "TEST_REQUIRES" => {
-    "Test::Most" => 0
+    "Test::MockObject" => 0,
+    "Test::More" => 0,
+    "Test::Most" => 0,
+    "Test::Resub" => 0
   },
-  "VERSION" => "0.002",
+  "VERSION" => "0.003",
   "test" => {
     "TESTS" => "t/*.t"
   }

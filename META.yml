@@ -3,7 +3,10 @@ abstract: "call remote services and hang up without waiting for a response. A wo
 author:
   - 'Logan Bell <logie@cpan.org>'
 build_requires:
+  Test::MockObject: 0
+  Test::More: 0
   Test::Most: 0
+  Test::Resub: 0
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
@@ -15,15 +18,13 @@ meta-spec:
 name: PrankCall
 requires:
   HTTP::Request: 0
-  Test::Fake::HTTPD: 0
-  Test::More: 0
   Try::Tiny: 0
   URI: 0
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=PrankCall
   homepage: http://metacpan.org/release/PrankCall
   repository: git://github.com/logie17/prankcall.git
-version: 0.002
+version: 0.003
 x_Dist_Zilla:
   perl:
     version: 5.016002

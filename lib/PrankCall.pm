@@ -3,7 +3,7 @@ BEGIN {
   $PrankCall::AUTHORITY = 'cpan:LOGIE';
 }
 {
-  $PrankCall::VERSION = '0.002';
+  $PrankCall::VERSION = '0.003';
 }
 
 use strict;
@@ -152,7 +152,7 @@ PrankCall
 
 =head1 VERSION
 
-version 0.002
+version 0.003
 
 =head1 SYNOPSIS
 
