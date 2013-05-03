@@ -17,14 +17,16 @@ meta-spec:
   version: 1.4
 name: PrankCall
 requires:
+  HTTP::Headers: 0
   HTTP::Request: 0
+  Scalar::Util: 0
   Try::Tiny: 0
   URI: 0
 resources:
   bugtracker: http://rt.cpan.org/Public/Dist/Display.html?Name=PrankCall
   homepage: http://metacpan.org/release/PrankCall
   repository: git://github.com/logie17/prankcall.git
-version: 0.003
+version: 0.004
 x_Dist_Zilla:
   perl:
     version: 5.016002

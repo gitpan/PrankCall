@@ -2,9 +2,6 @@ package PrankCall;
 BEGIN {
   $PrankCall::AUTHORITY = 'cpan:LOGIE';
 }
-{
-  $PrankCall::VERSION = '0.003';
-}
 
 use strict;
 use warnings;
@@ -15,6 +12,15 @@ use IO::Socket;
 use Scalar::Util qw(weaken isweak);
 use Try::Tiny;
 use URI;
+
+our $VERSION = '0.004';
+
+my $USER_AGENT = "PrankCall/$VERSION";
+
+sub import {
+  my ($class, %params) = @_;
+  $USER_AGENT = $params{user_agent} if $params{user_agent};
+};
 
 sub new {
   my ($class, %params) = @_;
@@ -82,8 +88,13 @@ sub _build_request {
   $uri->query_form($params);
   my $headers = HTTP::Headers->new;
 
-  $headers->header('Content-Type' => 'application/x-www-form-urlencoded');
-  my $req = HTTP::Request->new($params{method} => $uri->as_string, $headers);
+  $headers->header(
+    'Content-Type' => 'application/x-www-form-urlencoded',
+    'User_Agent' => $USER_AGENT,
+    'Host' => $self->{raw_host},
+  );
+
+  my $req = HTTP::Request->new($params{method} => $uri, $headers);
 
   if ($body) {
     my $uri = URI->new('http:');
@@ -97,10 +108,29 @@ sub _build_request {
   return $req;
 }
 
+sub _generate_http_string {
+  my ($self, $req) = @_;
+
+  my $request_path = $req->uri->path_query;
+  $request_path    = "/$request_path" unless $request_path =~ m{^/};
+  $request_path   .= ' '. $req->protocol if $req->protocol;
+
+  my $http_string  = join (' ', $req->method, $request_path ) . "\n";
+
+  if ( $req->headers ) {
+    $http_string .= join ("\n", $req->headers->as_string) . "\n";
+  }
+
+  if ( $req->content ) {
+    $http_string .= join ("\n", $req->content) . "\n";
+  }
+
+  return $http_string;
+}
+
 sub _send_request {
   my ($self, $req, $callback) = @_;
 
-  my $http_string  = $req->as_string;
   my $port         = $self->{port} || $req->uri->port || '80';
   my $raw_host     = $self->{raw_host} || $req->uri->host;
   my $timeout      = $self->{timeout};
@@ -108,6 +138,9 @@ sub _send_request {
   my $cache_socket = $self->{cache_socket} ||=0;
 
   $self->{_last_req} = $req;
+
+  # TODO: This will probably fail when hitting a proxy
+  my $http_string = $self->_generate_http_string($req);
 
   try {
     my $remote = $cache_socket && $self->{_socket} ?  $self->{_socket} :
@@ -120,12 +153,12 @@ sub _send_request {
       ) || die "Ah shoot Johny $!";
 
     $remote->autoflush(1);
-    $remote->send($http_string);
+    $remote->syswrite($http_string);
 
-    if ( $cache_socket && !$self->{_socket}) {
-      $self->{_socket} = $remote;
+    if ( $cache_socket ) {
+      $self->{_socket} = $remote if !$self->{_socket};
     } else {
-      close $remote;
+      $remote->close;
     }
 
     if ($callback) {
@@ -152,9 +185,11 @@ PrankCall
 
 =head1 VERSION
 
-version 0.003
+version 0.004
 
 =head1 SYNOPSIS
+
+    use PrankCall user_agent => 'Hangup-Howey';
 
     my $prank = PrankCall->new(
         host => 'somewhere.beyond.the.sea',

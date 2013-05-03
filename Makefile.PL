@@ -20,7 +20,9 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "PrankCall",
   "PREREQ_PM" => {
+    "HTTP::Headers" => 0,
     "HTTP::Request" => 0,
+    "Scalar::Util" => 0,
     "Try::Tiny" => 0,
     "URI" => 0
   },
@@ -30,7 +32,7 @@ my %WriteMakefileArgs = (
     "Test::Most" => 0,
     "Test::Resub" => 0
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.004",
   "test" => {
     "TESTS" => "t/*.t"
   }

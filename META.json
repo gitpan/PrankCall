@@ -28,7 +28,9 @@
       },
       "runtime" : {
          "requires" : {
+            "HTTP::Headers" : "0",
             "HTTP::Request" : "0",
+            "Scalar::Util" : "0",
             "Try::Tiny" : "0",
             "URI" : "0"
          }
@@ -55,7 +57,7 @@
          "web" : "https://github.com/logie17/prankcall"
       }
    },
-   "version" : "0.003",
+   "version" : "0.004",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016002"
